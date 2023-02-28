@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.17;
 
 contract RockPaperScissors {
     event GameCreated(address creator, bytes32 hashGame);
@@ -43,6 +43,10 @@ contract RockPaperScissors {
             'game already has players'
         );
         require(games[_hashGame].commits[msg.sender] == bytes32(0), 'result has been saved');
+
+        if (games[_hashGame].players[0] != msg.sender) {
+            games[_hashGame].players[1] = msg.sender;
+        }
 
         games[_hashGame].commits[msg.sender] = _hashResult;
         emit Commited(msg.sender, _hashGame);
