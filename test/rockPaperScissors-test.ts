@@ -1,6 +1,6 @@
 import { loadFixture, time } from "@nomicfoundation/hardhat-network-helpers";
 import { expect } from "chai";
-import { ethers, network } from "hardhat";
+import { ethers } from "hardhat";
 import { RockPaperScissors, RockPaperScissors__factory } from "../typechain-types";
 
 describe("RockPaperScissors", function() {
