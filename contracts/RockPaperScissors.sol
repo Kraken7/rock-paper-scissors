@@ -26,6 +26,12 @@ contract RockPaperScissors {
 
     bytes32[] hashGames;
 
+    address private owner;
+
+    constructor() {
+        owner = msg.sender;
+    }
+
     function createGame() external {
         bytes32 hashGame = bytes32(uint256(block.timestamp) + uint256(uint160(msg.sender)));
 
@@ -104,4 +110,13 @@ contract RockPaperScissors {
 
         return _gameView;
     }
+
+    function withdraw() external {
+        require(msg.sender == owner, 'access is denied');
+        payable(owner).transfer(address(this).balance);
+    }
+
+    receive() external payable {}
+
+    fallback() external payable {}
 }
